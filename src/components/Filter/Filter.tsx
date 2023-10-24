@@ -9,17 +9,10 @@ interface itemsList {
 }
 
 export function Filter() {
-  const handleListGenres = () => {
-    const result = api
-      .get('/genre/movie/list?language=pt-BR', {
-        headers: {
-          accept: 'application/json',
-          Authorization: `Bearer ${process.env.ACCESS_TOKEN as string} `,
-        },
-      })
-      .then((response) => response.data.genres)
+  const handleListGenres = async () => {
+    const { data } = await api.get('/genre/movie/list?language=pt-BR')
 
-    return result
+    return data.genres
   }
 
   const { data } = useQuery({
